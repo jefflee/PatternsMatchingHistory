@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TypePatternMatching002
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+
             var shapes = new List<IShape>
             {
-                { 0, 9, "矩形1" },
-                { 10, 11, "矩形2" },
-                { 3, 3, "矩形3" },
-                { 10, 10, "矩形4"},
-                new Circle () { Radius = 4, Name = "圓形"},
+                { 0, 9, "rectangle1" },
+                { 10, 11, "rectangle2" },
+                { 3, 3, "rectangle3" },
+                { 10, 10, "rectangle4"},
+                new Circle () { Radius = 4, Name = "Circle"},
                 new Line (),
                 null,
             };
@@ -29,41 +28,43 @@ namespace TypePatternMatching002
             Console.ReadLine();
         }
 
-        static string GetDisplayName(IShape shape)
+        private static string GetDisplayName(IShape shape)
         {
             switch (shape)
             {
                 case null:
-                    return "請不要亂丟 null 進來";
+                    return "Do not put null";
                 case Rectangle r when r.Width <= 0 || r.Height <= 0:
-                    return "矩形長寬不符規定";
+                    return "Width or Height is not valid";
                 case Rectangle r when r.Width * r.Height < 10:
-                    return "小矩形";
+                    return "small rectangle";
                 case Rectangle r when r.Width * r.Height > 100:
-                    return "大矩形";
+                    return "big rectangle";
                 case Rectangle _:
-                    return "中矩形";
+                    return "medium rectangle";
                 default:
-                    return "不是矩形";
+                    return "not rectangle";
             }
         }
     }
+
     /// <summary>
     /// 純粹為了偷懶
     /// </summary>
-    static class ShapeExtensions
+    internal static class ShapeExtensions
     {
         public static void Add(this ICollection<IShape> shapes, double width, double height, string name)
         {
             shapes.Add(new Rectangle { Width = width, Height = height, Name = name });
         }
     }
-    interface IShape
+
+    internal interface IShape
     {
         string Name { get; set; }
     }
 
-    class Rectangle : IShape
+    internal class Rectangle : IShape
     {
         public string Name { get; set; }
 
@@ -72,14 +73,15 @@ namespace TypePatternMatching002
         public double Height { get; set; }
 
     }
-    class Circle : IShape
+
+    internal class Circle : IShape
     {
         public string Name { get; set; }
 
         public double Radius { get; set; }
     }
 
-    class Line : IShape
+    internal class Line : IShape
     {
         public string Name { get; set; }
 
