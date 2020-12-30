@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace PropertyPatternMatching001
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] _)
+        private static void Main(string[] _)
         {
             foreach (var p in Create())
             {
@@ -18,21 +18,19 @@ namespace PropertyPatternMatching001
             Console.ReadLine();
         }
 
-
-
-        static List<Person> Create()
+        private static List<Person> Create()
         {
             return new List<Person>()
             {
-                { "Bill" , "Chung" , "台北", "100"  },
-                { "Tom", "Chung", "台中", "200" },
-                { "John" ,  "Lee" , "台北" , "100"},
-                { "John" ,  "Lee" , "台中" , "200"},
+                { "Bill" , "Chung" , "Taipei", "100"  },
+                { "Tom", "Chung", "Taichung", "200" },
+                { "John" ,  "Lee" , "Taipei" , "100"},
+                { "John" ,  "Lee" , "Taichung" , "200"},
             };
         }
     }
 
-    static class PersonExtensions
+    internal static class PersonExtensions
     {
         public static void Add(this ICollection<Person> people, string firstName, string lastName, string city, string zipCode)
         {
@@ -40,7 +38,7 @@ namespace PropertyPatternMatching001
         }
     }
 
-    class Person
+    internal class Person
     {
         public string FirstName { get; set; }
 
@@ -50,8 +48,7 @@ namespace PropertyPatternMatching001
 
     }
 
-
-    class Address
+    internal class Address
     {
         public string City { get; set; }
 
